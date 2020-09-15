@@ -36,6 +36,8 @@
 </template>
 
 <script>
+    import {getHot} from "../../api/article";
+
     export default {
         name: "index",
         data(){
@@ -155,6 +157,16 @@
                     }
                 ]
             }
+        },
+        methods:{
+            getHot(){
+                getHot().then(res=>{
+                    console.log(res)
+                })
+            }
+        },
+        created() {
+            this.getHot()
         }
     }
 </script>
