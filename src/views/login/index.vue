@@ -5,13 +5,13 @@
              <h1>后台登录</h1>
              <div class="iptBox">
                  <div class="row" >
-                     <input type="text" placeholder="请输入用户名">
+                     <input type="text" placeholder="请输入用户名" v-model="loginForm.email">
                  </div>
                  <div class="row" >
-                     <input type="password" placeholder="密码">
+                     <input type="password" placeholder="密码" v-model="loginForm.password">
                  </div>
                  <div class="row btnBox" >
-                     <div class="btn">
+                     <div class="btn" @click="loginSubmit">
                          登录
                      </div>
                  </div>
@@ -22,7 +22,22 @@
 
 <script>
     export default {
-        name: "index"
+        name: "index",
+        data(){
+            return{
+                loginForm:{
+                    email:'15131547031@163.com',
+                    password:''
+                }
+            }
+        },
+        methods:{
+            loginSubmit(){
+             this.$store.dispatch("LoginByUsername",this.loginForm).then(()=>{
+                 this.$router.push({path:'/release'})
+             })
+            }
+        }
     }
 </script>
 

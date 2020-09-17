@@ -28,7 +28,7 @@
                 navitemList: [
                     {
                         name: '首页',
-                        path: '/'
+                        path: '/wel'
                     },
                     {
                         name: '服务器',
@@ -79,7 +79,6 @@
         },
         created() {
             this.getlist()
-            this.$store.dispatch('LoginByUsername', {name: '1111'})
         },
         updated() {
 

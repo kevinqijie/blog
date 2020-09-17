@@ -19,3 +19,11 @@ export const getHot=()=>{
         method: 'get',
     })
 }
+
+export const addArticle=(data)=>{
+    return request({
+        url:`/api/article/add`,
+        method: 'post',
+        data
+    })
+}

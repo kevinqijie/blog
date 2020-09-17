@@ -196,10 +196,7 @@
        cursor: pointer;
        box-sizing: border-box;
    }
-    h3{
-        color: #21759b;
-        font-size: 14px;
-    }
+
     .listBox{
         margin: 10px 0 20px 0;
     }

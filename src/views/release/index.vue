@@ -2,11 +2,11 @@
     <div class="release">
         <div>
             <label>标题:</label>
-            <input type="text" placeholder="标题" >
+            <input type="text" placeholder="标题" v-model="title">
         </div>
         <div>
             <label>分类:</label>
-            <select v-model="test">
+            <select v-model="category">
                 <option :value ="item.id" v-for="(item,index) in navitemList" :key="index">{{item.name}}</option>
             </select>
         </div>
@@ -17,6 +17,7 @@
 
 <script>
     import E from 'wangeditor';
+    import {addArticle} from "../../api/article";
     export default {
         name: "index",
         data () {
@@ -48,13 +49,21 @@
                         id:'6'
                     },
                 ],
-                test:1
+                category:1,
+                title:''
             }
         },
         methods: {
             getContent: function () {
-                console.log(this.editorContent);
-                console.log(this.test)
+               let description =  this.editorContent.replace(/<[^<>]+>/g, "").replace(/&nbsp;/gi, "").substring(0,100)
+                addArticle({
+                    title:this.title,
+                    content:this.editorContent,
+                    category:this.category,
+                    description:description
+                }).then(res=>{
+                    console.log(res)
+                })
             }
         },
         mounted() {

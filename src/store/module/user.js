@@ -1,23 +1,29 @@
+import {LoginByUsername} from "../../api/user";
+
 const user = {
     state: {
-      userInfo:{}
+      userInfo:{},
+      token:localStorage.getItem('token')
     },
     actions: {
-        LoginByUsername({ commit }, userInfo){
+        LoginByUsername({ commit },loginForm){
             return new Promise((resolve, reject) => {
-                console.log(userInfo)
-                if(userInfo){
-                    commit('SET_USERINFO',userInfo)
+                LoginByUsername(loginForm).then(res=>{
+                    commit('SET_TOKEN',res.data.token)
                     resolve()
-                }else {
-                    reject()
-                }
+                }).catch((err)=>{
+                    reject(err)
+                })
             })
         }
     },
     mutations:{
         SET_USERINFO:(state,userInfo)=>{
             state.userInfo = userInfo
+        },
+        SET_TOKEN:(state,token)=>{
+            state.token = token
+            localStorage.setItem('token',token)
         }
     }
 }

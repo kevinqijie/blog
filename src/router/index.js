@@ -9,7 +9,8 @@ Vue.use(VueRouter)
       path: '',
       component:() => import('../views/layout/index.vue'),
       children:[
-        {path:'/', redirect:'/list/'},
+        {path:'/', redirect:'/wel'},
+        {path:'/wel', component:() => import('../views/wel')},
         {path:'/list/*', component:() => import('../views/list')},
         {path:'/article/*', component:() => import('../views/article')},
         {path:'/release', component:() => import('../views/release')}

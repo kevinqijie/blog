@@ -1,14 +1,13 @@
 import axios from 'axios'
 import router from '../router'
 import store from '../store'
-
+import {Message} from 'element-ui'
 axios.interceptors.request.use(
     config => {
         let t = localStorage.getItem('token')
         if (t) {
             config.headers.Authorization = t
         }
-
         return config
     },
     err => {
@@ -19,11 +18,16 @@ axios.interceptors.request.use(
 // 拦截响应
 axios.interceptors.response.use(
     response => {
-        // console.log(response)
+       let {status} =response
+        console.log(status)
         return response
     },
     err => {
-        console.log(err.response)
+        Message({
+            message: err.response.data.message,
+            type: 'error',
+            duration: 5 * 1000
+        })
         if (err.response) {
             switch (err.response.status) {
                 case 401:
